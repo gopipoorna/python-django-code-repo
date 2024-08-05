@@ -192,3 +192,59 @@ def home(request):
     return render(request, 'blog/home.html', context=<dictionary>)
 >
 
+Let's pass some demo data into the HTML Template using views.py
+
+The data that we are passing to the context parameter to the HTML page must be a dictionary type. 
+
+Through this, we can use that data by Jinja 
+
+code-snippet:
+
+<
+<body>
+    <h1>Blog Home!!</h1>
+    {% for post in posts %} 
+        <h1>{{post.Title}}</h1>
+        <p> By {{post.Author}} posted on {{post.Date_Posted}}</p>
+        <p>{{post.Content}}</p>
+    {% endfor %}
+</body>
+>
+
+
+Usually, all our webpages have the common UI, and so if we wanna make changes we can make changes easily from one place and it will reflect in all the web pages, 
+
+to do this, we have to create a default webpage and inherit this default web page in all the web pages.
+
+We can use this by having the below code in the default page
+
+code-snippet:
+<
+{% block <any-name> %}
+{% endblock %}
+>
+
+Now, we need to inherit this to all the pages in our application
+
+To do this,
+
+We can use the 
+
+code-snippet:
+<
+{% extends 'path' %}
+{% block <name-used-in-default-template> %}
+{% endblock <name-used-in-default-template> %}
+>
+
+In Django, the static files are located under the static folder 
+
+TO add thee static files, we need to add the
+
+code-snippet:
+<
+{% load static %}
+>
+
+and we inherit the properties of these static files.
+
