@@ -192,6 +192,8 @@ def home(request):
     return render(request, 'blog/home.html', context=<dictionary>)
 >
 
+Day - 2:
+
 Let's pass some demo data into the HTML Template using views.py
 
 The data that we are passing to the context parameter to the HTML page must be a dictionary type. 
@@ -248,3 +250,98 @@ code-snippet:
 
 and we inherit the properties of these static files.
 
+Day-3:
+
+Django, by default comes with the Administration console, which is used to create and manage users.
+
+You can find the admin page under 'admin/' route after the IP/URL.
+
+To use this, we should have a superuser, this superuser can be access the admin console and create and manage users, groups and roles.
+
+But, if you try to create a superuser from the CLI, it won't work because because, we haven't migrated the apps.
+
+Migrations are nothing but used to create DB tables and modify the DB tables.
+
+These all migrations are stored under the migrations folder with the versions.
+
+Now, let's migrate and create the super user using the CLI Commands
+
+code-snippet:
+<
+$python3 manage.py migrate
+$python3 manage.py createsuperuser 
+>
+
+And when you are trying to access the application from the URL or any https site then it won't work because, CSRF (Cross-Site-Request-Forgery) Token will retrict by default
+you can see more info in - https://docs.djangoproject.com/en/4.2/ref/csrf/
+
+To access this site, then we need to add the below variable in the Settings.py file
+and also make sure the list data should contain, either http/https
+
+<
+CSRF_TRUSTED_ORIGINS=['https://*.amazonaws.com']
+>
+
+Django uses models to create and manage the data tables.
+
+By default Django uses sqlite3 to store the data, we can change it based on the environment.
+
+Now, let's use the models to create the tables and store the data in the tables.
+
+Here, we have created a model under models.py file.
+
+Now, we have to migrate the changes to see the differences and to apply them into the application.
+
+And likewise, we can also see this code under the App->Migrations->migration_number
+
+Here, all the details can be seen.
+
+Now, let's see, how we can see the raw SQL code for the same to create a table from the model.
+
+For this, we have to go to CLI and the required parameters are the app-name, and migration number
+
+<
+$ python3 manage.py sqlmigrate blog <0001>
+>
+
+Now, after this, we can use Django-shell to work with the models interatively.
+
+code-snippet:
+CLI
+<
+$ python3 manage.py shell
+>
+
+Usually, the models can be found in the 'django.contrib.auth.models import User'
+
+Now, let's access our models from here
+
+let's import our models from the app
+
+<
+from app import models
+from django.contrib.auth.models import User
+# to filter the data
+User.objects.all()
+User.objects.filter(name="")
+User.objects.get(id=1)
+User.objects.first()
+
+# we can add data to the table by using the classes in the models
+m1 = model(data)
+m1.save()
+
+# by using save, we can insert or update the data
+>
+
+https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#date
+
+From the admin GUI, we can't see the models here but to see the models here, we have to register them in the admin.py file in the app directory
+
+to do that we have to add the below line
+
+<
+from .models import class_name
+
+admin.site.register(class_name)
+>
