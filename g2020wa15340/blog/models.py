@@ -11,5 +11,5 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"[Title: {self.title}, Content: {self.content}, Date: {self.date_posted}, Author: {self.author}]"
+        return f"{self.title}"
     

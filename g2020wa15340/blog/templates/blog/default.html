@@ -44,15 +44,22 @@
           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
+            {% if user.is_authenticated %}
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
               <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
             </div>
             <!-- Navbar Right Side -->
-            <div class="navbar-nav">
-              <a class="nav-item nav-link" href="#">Login</a>
-              <a class="nav-item nav-link" href="#">Register</a>
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <a class="nav-item nav-link" href="{% url 'user-profile' %}">My Profile</a>
+              <a class="nav-item nav-link" href="{% url 'user-logout' %}">Logout</a>
             </div>
+            {% else %}
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <a class="nav-item nav-link" href="{% url 'user-login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'user-register' %}">Register</a>
+            </div>
+            {% endif %}
           </div>
         </div>
       </nav>
@@ -60,6 +67,13 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
+        {% if messages  %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
         {% block ui %}
         {% endblock %}
       </div>
