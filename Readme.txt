@@ -345,3 +345,149 @@ from .models import class_name
 
 admin.site.register(class_name)
 >
+
+User Registration using Django:
+
+For this, let's create a new app to use the UserRegistration and login and logout.
+
+<
+$ django-admin startapp users
+>
+
+after this add this app in the settings.py file in the project
+
+<
+INSTALLED_APPS = [
+    'blog.apps.BlogConfig',
+    'users.apps.UsersConfig',
+]
+>
+
+Usually, whenever the user is registering to our Application, we may need to do some validations.
+
+To do this we have to create an view and we can use some default forms that exists in Django.
+
+Usually, the classes will acts as a HTML template in Django
+
+Now, let's add these forms.
+
+To do this, we have to import the UserCreationForm from the django.contrib.auth.forms
+
+This will give us the flexibility to add users into the application.
+
+Now, take this instance and add the form.
+
+You may check the code in Users->views.py file
+
+Now, we have to pass this forms into the html template, and you may check the templates in the users for this
+
+But, as we are using the default forms provided by Django, we are not seeing the firstname, lastname and email fields in the Registration page
+
+to get this, we have to do some modifications in the UserCreationForm form, for this, we are creating a forms.py file and inherit the UserCreationForm
+
+and modify it as per your requirement
+
+Go through the forms.py file in the Users directory.
+
+Now, import that custom class into the views.py and update it, now we can be able to see these fields.
+
+Now, how to add the created user to the DB.
+
+Simply use .save() method and the user will be created and saved to the DB.
+
+Now, the UI is not so good, we want to add the design to our UI.
+
+For this we have Crispy forms, which is used to fetch CSS from Bootstrap, tailwind, or anything.
+
+We have to install it first, let's install it.
+
+<
+$ pip install django-crispy-forms
+>
+
+after installing it, we need to add this crispy forms to the apps in settings.py file.
+
+Now, we need to also tell the django-crispy-forms to use the bootstrap, for this, we can simply add the 
+
+<
+CRISPY_TEMPLATE_PACK = 'bootstrap5'/'tailwind'
+>
+
+add the tag at the top of the html page
+
+<
+{% load crispy_forms_tags %}
+
+and also in the form data tag
+
+{{ form | crispy }}
+>
+
+Now, we have to use the bootstrap5, for this we also need to install the crispy-bootstrap5
+
+and add it to the apps 
+
+<
+INSTALLED_APPS = (
+    ...
+    "crispy_forms",
+    "crispy_bootstrap5",
+}
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+>
+
+Now, reload the page and the design will change automatically.
+
+Now, let's add the login and logout functionality
+
+for this, we are adding the 2 more routes in the urls.py file in the Users application
+
+and the methods we are taking directly from the django.contrib.auth.views, we are importing 
+
+<
+from django.contrib.auth import views
+
+    path("login/", views.LoginView.as_view(template_name="users/login.html"), name="user-login"),
+    path("logout/", views.LogoutView.as_view(template_name="users/logout.html"), name="user-logout"),
+>
+
+by default the route will look for the login and logout templates in the default folder, we need to change this by adding the template_name parameter in the pattern
+
+and also we need to add a few paths in the settings.py file to route the traffic back to these urls.
+
+<
+LOGIN_REDIRECT_URL = 'blog-home'
+
+LOGIN_URL = 'user-login'
+>
+
+So, when the authenticated user tries to look some data then it will automatically redirect to the LOGIN_REDIRECT_URL page
+
+When the un-authenticated user tries to login then automatically login to user-login page
+
+We can also restrict the un-authenticated users to access content by adding the decorators 
+
+<
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def fun():
+    pass
+>
+
+We just need to add this decorators, and then the user must be authenticated to access the content.
+
+
+Adding the Profile and feature to modify the username and other fields.
+
+Usually, django User table doesn't have the profile picture option,
+
+so, we are adding here by creating a new model and making a one to one relationship between the tables
+
+We need to add the ImageField to add the user.
+
+We also need Pillow module, to use the image field.
+
