@@ -491,3 +491,65 @@ We need to add the ImageField to add the user.
 
 We also need Pillow module, to use the image field.
 
+We are using a separate model called Profile, to see and update the profile of the user, for this we have created a model, which will be in a onetoone relationship
+with the User model, this will be having the extra field called image, which will store the image and also have the default image in it.
+
+Now, we have create a Profile model and migrated it.
+
+Now, we will be passing this to the profile template using the views.
+
+=======================================================================
+
+Usually, we will face the issue that the image is not showing in the Profile, even though the path is correct.
+
+For this, if we are using different apps, we are creating a MEDIA_URL and MEDIA directory to store our images but here,
+
+We have to extend it with the urlpatterns, and this need to be done in the project_directory, where setting.py file is there.
+
+In this directory open the urls.py file and add the extra line,
+
+Open the project>urls.py file more info on this.
+
+========================================================================
+
+Now, once the functionality is added, you will observe that the image is still not showing for the user who has created at that instance.
+
+This is because the Profile is not creating for the users all the time, to create this,
+
+We have to use signals.py file and add the methods to trigger automatically to create a profile with the default image.
+
+for this, create signals.py file in the users app, import the below modules.
+
+<
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from .models import Profile
+>
+
+Now, add the functionality by using the decorator receiver and pass the instances.
+
+Open the signals.py file to get more clarity on this.
+
+and also we have to add a function in the apps.py in the application directory
+
+Once this is done, whenever any new user is created then Django is capable of creating a profile by default.
+
+Now, let's add the functionality of modifying the user profile and picture with the certain length and width.
+
+For this, we are creating a new forms in the users->forms.py file, 
+
+Let's create a new forms, called updateUserProfile and UpdateUserForm.
+
+Here, using these both classes, we can update the user profile.
+
+now, let's create a new view and pass the data through it.
+
+and use the required methods to update the data through the form.
+
+Load the User and Profile models and using the requests.
+
+Open the views for more breifing.
+
+We also have to update the template for the same.
+
