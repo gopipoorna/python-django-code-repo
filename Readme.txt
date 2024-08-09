@@ -553,3 +553,26 @@ Open the views for more breifing.
 
 We also have to update the template for the same.
 
+Day 5:
+
+Let's create the Forms to create, update, delete posts in our application.
+
+To do this, we are using class based views which comes default with the Django, by using these class based views,
+
+We can get all our details.
+
+For this, we have to import the class based views from the django.views.generic import CreateView, DetailView, DeleteView, UpdateView
+
+We are using all these views to achieve the functionalities that we want.
+
+So, we are creating and inheriting these generic views in our classes, this will help us in reducing the code and display the UI easily.
+
+Now, you can see the views.py file to know more about this.
+
+By default, these ClassBased views have the default templates, to use them we have to create the <app>/<model_viewtype>.html under our templates directory
+
+To override these, we have to tell the ClassBased views to use the particular files.
+
+You can get these more from the Errors itself.
+
+We also have to add some more functions in the models and also in the details.
