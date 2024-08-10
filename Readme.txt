@@ -576,3 +576,37 @@ To override these, we have to tell the ClassBased views to use the particular fi
 You can get these more from the Errors itself.
 
 We also have to add some more functions in the models and also in the details.
+
+Day 6:
+
+https://docs.djangoproject.com/en/5.0/topics/pagination/
+Pagination, is nothing but adjusting the content into multiple pages, so that the content will spread out and adding page numbers to the content
+For this we can use the views and in previous topics, we have used our ClassBased Views, by default the ListView will be having the pagination inheritance.
+Through this we can add the parameter "paginate_by = <number>" under this class.
+and we have to add the links to go to other pages, please go through the documentation or the go through the home.html page, you can find the process of adding links
+
+Password reset using email, using the Django
+For this, we have a few default views to add these routers, for this we just have to create the routes and the templates.
+
+In this we have to add the below routes
+
+<
+path("password-reset/", views.PasswordResetView.as_view(template_name="users/password_reset.html"), name="password_reset"),
+path("password-reset-done/", views.PasswordResetDoneView.as_view(template_name="users/password_reset_done.html"), name="password_reset_done"),
+path("password-reset-confirm/<uidb64>/<token>/", views.PasswordResetConfirmView.as_view(template_name="users/password_reset_confirm.html"), name="password_reset_confirm"),
+path("password-reset-complete/", views.PasswordResetCompleteView.as_view(template_name="users/password_reset_complete.html"), name="password_reset_complete"),
+>
+
+and also we have to create the corresponding templates as well for this.
+
+and check the documentation for the same
+
+documentation:
+
+DEV:
+https://docs.djangoproject.com/en/2.1/topics/email/#configuring-email-for-development
+https://docs.djangoproject.com/en/5.1/topics/email/#configuring-email-for-development
+
+Prod:
+https://docs.djangoproject.com/en/5.1/topics/email/#
+
