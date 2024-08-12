@@ -610,6 +610,8 @@ https://docs.djangoproject.com/en/5.1/topics/email/#configuring-email-for-develo
 Prod:
 https://docs.djangoproject.com/en/5.1/topics/email/#
 
+Auto-Logout after inactivity: https://pypi.org/project/django-auto-logout/
+
 #########################################################################
 
 Day:7
@@ -657,5 +659,71 @@ $ ssh-keygen -b 4096
 
 Now, we can find this file in the default .ssh folder of your machine.
 
-After finding the file, copy the public key file to the server
+After finding the file, copy the public key file to the server under .ssh directory as authorized_keys
 
+and change the permissions to 600/700 to all the files in the .ssh folder
+
+$ chmod 600 .ssh/*
+
+<
+poorna:~/$ ll /home/ec2-user/.ssh/
+total 20
+-rw-------. 1 ec2-user ec2-user  991 Jul 31 12:47 authorized_keys
+-rw-------. 1 ec2-user ec2-user 3414 Aug 12 05:41 id_rsa
+-rw-r--r--. 1 ec2-user ec2-user  764 Aug 12 05:41 id_rsa.pub
+-rw-------. 1 ec2-user ec2-user  828 Aug 12 05:43 known_hosts
+-rw-r--r--. 1 ec2-user ec2-user   92 Aug 12 05:18 known_hosts.old
+>
+
+To enable ssh authentication in ubuntu/rpm based machines, we need to edit the ssh_config file under /etc/ssh/ssh_config
+
+<
+$ sudo vi /etc/ssh/sshd_config
+>
+
+Here we need to modify 2 things
+
+1: Make the "PermitRootLogin" to "no"
+<
+$ PermitRootLogin no
+>
+2: Disable the password based authentication, for this uncomment the PasswordAuthentication and set it to no
+<
+$ PasswordAuthentication no
+>
+
+After this we need to restart the SSH service
+<
+$ sudo systemctl restart sshd
+>
+
+This will enable the ssh access 
+
+===================================================
+
+Now, let's install the ufw (uncomplicated firewall)
+
+<
+$ sudo apt install ufw -y
+>
+
+In traditional way, ufw is used to allow and deny traffic of the server.
+
+But in Cloud environment we don't have this, but for understanding
+
+we can allow the traffic using this
+
+by running a few commands
+
+<
+sudo ufw allow default outgoing
+sudo ufw deny default incoming
+sudo ufw allow ssh
+sudo ufw allow
+>
+
+Now, we have to add the requirements.txt file to bundle all the required packages under a file.
+
+So that our deplpyment will know that what are all the packages are required.
+
+for this
