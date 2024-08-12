@@ -1,2 +1,6 @@
 # python
-__pycache__/
+django-venv/lib/python3.9/site-packages/*/*/*/__pycache__
+g2020wa15340/blog/__pycache__
+g2020wa15340/users/__pycache__
+g2020wa15340/blog/migrations/__pycache__
+g2020wa15340/users/migrations/__pycache__
