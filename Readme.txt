@@ -610,3 +610,52 @@ https://docs.djangoproject.com/en/5.1/topics/email/#configuring-email-for-develo
 Prod:
 https://docs.djangoproject.com/en/5.1/topics/email/#
 
+#########################################################################
+
+Day:7
+
+Deploying application into the server
+
+Let's create a server in AWS for this and recommended is ubuntu.
+
+Now, let's change the hostname of the server by
+
+$ hostnamectl set-hostname <hostname>
+$ hostname
+
+Now, we also need to make changes in the /etc/hosts file as well
+
+Open this file and add the server private IP of the machine and name you want
+
+<
+19.24.98.23 <host_name>
+>
+
+Now, let's add the user, to provide less privileges,
+
+$ adduser <username>
+
+Give the password and other details, which you wanna give.
+
+We have to provide access to the user to use Sudo, we can do this by simply running the below command
+
+$ adduser <username> sudo
+
+##############
+
+SSH Authentication: 
+
+For this create a folder called ".ssh"
+
+usually, when we are creating this folder, we have to create in this ways
+
+$ mkdir -p ~/.ssh
+
+Now, on your local machine, create a ssh key, for this go to your local machine cmd and run
+
+$ ssh-keygen -b 4096
+
+Now, we can find this file in the default .ssh folder of your machine.
+
+After finding the file, copy the public key file to the server
+
