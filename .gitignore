@@ -1,6 +1,8 @@
 # python
-django-venv/lib/python3.9/site-packages/*/*/*/__pycache__
-g2020wa15340/blog/__pycache__
-g2020wa15340/users/__pycache__
-g2020wa15340/blog/migrations/__pycache__
-g2020wa15340/users/migrations/__pycache__
+
+__pycache__/
+
+*.log
+local_settings.py
+db.sqllite3
+db.sqllite3-journal
