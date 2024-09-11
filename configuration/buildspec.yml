@@ -1,0 +1,57 @@
+version: 0.2
+
+env:
+  shell: /bin/bashex
+  parameter-store:
+    SECRET: /2020wa15340
+    
+phases:
+  install:
+    commands:
+      - echo Installing Required Packages
+      - echo updating all the packages
+      - sudo apt update -y
+      - sudo apt upgrade -y
+      - echo installing Apache webserver
+      - sudo apt install -y apache2
+      - echo installing pip3 for python
+      - sudo apt-get install python3-pip -y
+      - echo installing python virtual environment
+      - sudo apt install python-venv -y
+      - echo Installing Virtualenv using PIP3
+      - sudo pip3 install virtualenv -y
+    
+  pre_build:
+    commands:
+      - echo Installing the git
+      - sudo apt install git -y
+      - echo fetching the repository from the git
+      - sudo git clone git@github.com:gopipoorna/python-django-code-repo.git
+      - echo Creating a Virtual Environment
+      - sudo virtualvenv python-django-code-repo/ venv
+      - echo Enabling the virtual environment
+      - sudo source /python-django-code-repo/venv/bin/activate
+      - 
+      - sudo 
+      - sudo
+    
+  build:
+    run-as: ubuntu
+    on-failure: ABORT | CONTINUE
+    commands:
+      - command
+      - command
+    finally:
+      - command
+      - command
+    
+  post_build:
+    run-as: Linux-user-name
+    on-failure: ABORT | CONTINUE
+    commands:
+      - command
+      - command
+    finally:
+      - command
+      - command
+
