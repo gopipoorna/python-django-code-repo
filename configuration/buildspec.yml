@@ -1,7 +1,7 @@
 version: 0.1
 
 env:
-  shell: /bin/bashex
+  shell: /bin/bash
   parameter-store:
     SECRET: /2020wa15340
     
