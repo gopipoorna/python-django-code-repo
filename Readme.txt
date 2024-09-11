@@ -878,3 +878,39 @@ Now, test the application.
 Troubleshooting notes:
 https://forum.djangoproject.com/t/403-forbidden-apache2-you-dont-have-permission-to-access-this-resource/18709/3
 
+RDS: 
+username: blogadmin
+password: WQWsR25yrKGf5TQAn3ha
+
+psql \
+   --host=blog-app.cqaqtxayztiq.us-east-1.rds.amazonaws.com \
+   --port=5432 \
+   --username=blogadmin \
+   --password \
+   --dbname=postgres 
+   
+
+CREATE DATABASE blogs
+WITH
+   [OWNER =  django_admin]
+   [TEMPLATE = template]
+   [ENCODING = encoding]
+   [LC_COLLATE = collate]
+   [LC_CTYPE = ctype]
+   [TABLESPACE = tablespace_name]
+   [ALLOW_CONNECTIONS = true | false]
+   [CONNECTION LIMIT = max_concurrent_connection]
+   [IS_TEMPLATE = true | false ];
+   
+   
+Ec2 instance user data:
+ 
+ #!/bin/bash
+
+sudo apt update
+sudo apt install ruby-full -y
+sudo apt install wget
+cd /home/ubuntu
+sudo wget -P /home/ubuntu/ https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+sudo chmod +x /home/ubuntu/install
+sudo /home/ubuntu/install auto > /tmp/logfile
