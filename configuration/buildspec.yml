@@ -29,7 +29,7 @@ phases:
       - echo Creating a Virtual Environment
       - virtualenv venv
       - echo Enabling the virtual environment
-      - sudo source python-django-code-repo/venv/bin/activate
+      - sudo . venv/bin/activate
     
   build:
     commands:
