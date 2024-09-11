@@ -26,11 +26,13 @@ phases:
       - echo fetching the repository from the git
       - sudo git clone https://github.com/gopipoorna/python-django-code-repo.git
       - echo $(pwd)
+      - echo $(ls)
+      - sudo rm -rf venv
       - echo Creating a Virtual Environment
       - virtualenv venv
       - echo Enabling the virtual environment
       - echo $(ls)
-      - source ./venv/bin/activate
+      - source venv/bin/activate
     
   build:
     commands:
