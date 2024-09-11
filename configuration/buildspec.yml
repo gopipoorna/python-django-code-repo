@@ -27,6 +27,7 @@ phases:
       - sudo git clone https://github.com/gopipoorna/python-django-code-repo.git
       - echo Creating a Virtual Environment
       - sudo virtualenv python-django-code-repo/venv
+      - echo $(pwd)
       - echo Enabling the virtual environment
       - sudo source python-django-code-repo/venv/bin/activate
     
