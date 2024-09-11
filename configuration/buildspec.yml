@@ -24,7 +24,7 @@ phases:
       - echo Installing the git
       - sudo apt install git -y
       - echo fetching the repository from the git
-      - sudo git clone git@github.com:gopipoorna/python-django-code-repo.git
+      - sudo git clone https://github.com/gopipoorna/python-django-code-repo.git
       - echo Creating a Virtual Environment
       - sudo virtualvenv python-django-code-repo/ venv
       - echo Enabling the virtual environment
