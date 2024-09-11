@@ -32,14 +32,12 @@ phases:
       - virtualenv venv
       - echo Enabling the virtual environment
       - ls
-      - . venv/bin/activate
+      - chmod +x venv/bin/activate
+      - source venv/bin/activate
     
   build:
     commands:
       - echo enabling the apache server
-      - sudo systemctl enable apache2
-      - echo starting the apache server
-      - sudo systemctl start apache2
       - echo Copying the Apache file to the Apache path
       - sudo cp python-django-code-repo/configuration/django-apache.conf
       - echo changing the owner of the folder
