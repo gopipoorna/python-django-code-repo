@@ -29,7 +29,8 @@ phases:
       - echo Creating a Virtual Environment
       - virtualenv venv
       - echo Enabling the virtual environment
-      - sudo . venv/bin/activate
+      - echo $(ls)
+      - source ./venv/bin/activate
     
   build:
     commands:
