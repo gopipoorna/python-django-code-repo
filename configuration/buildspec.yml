@@ -13,7 +13,7 @@ phases:
       - sudo apt update -y
       - sudo apt upgrade -y
       - echo installing Apache webserver
-      - sudo apt install -y apache2
+      - sudo apt install apache2 apache2-utils ssl-cert libapache2-mod-wsgi-py3 -y
       - echo installing pip3 for python
       - sudo apt-get install python3-pip -y
       - echo installing python virtual environment
@@ -30,28 +30,34 @@ phases:
       - echo Creating a Virtual Environment
       - sudo virtualvenv python-django-code-repo/ venv
       - echo Enabling the virtual environment
-      - sudo source /python-django-code-repo/venv/bin/activate
-      - 
-      - sudo 
-      - sudo
+      - sudo source python-django-code-repo/venv/bin/activate
     
   build:
-    run-as: ubuntu
-    on-failure: ABORT | CONTINUE
     commands:
-      - command
-      - command
+      - echo enabling the apache server
+      - sudo systemctl enable apache2
+      - echo starting the apache server
+      - sudo systemctl start apache2
+      - echo Copying the Apache file to the Apache path
+      - sudo cp python-django-code-repo/configuration/django-apache.conf
+      - echo changing the owner of the folder
+      - sudo chown :www-data python-django-code-repo/
+      - echo changing the owner of the folder
+      - sudo chown :www-data python-django-code-repo/g2020wa15340
+      - echo changing the owner of the folder
+      - sudo chown :www-data python-django-code-repo/g2020wa15340/media
+      - echo changing the owner of the folder
+      - sudo chown :www-data python-django-code-repo/g2020wa15340/static
+      - echo modifying the folder permissions for the repo file
+      - sudo chmod 755 $(pwd)
+      - echo changing the owner for DBSQLITE3 file
+      - sudo chown :www-data python-django-code-repo/g2020wa15340/dbsqlite3
+      - sudo chmod 755 python-django-code-repo/g2020wa15340/dbsqlite3
+      - echo adding the application to the apache server
+      - sudo a2ensite /etc/apache2/sites-available/django-apache2.conf
+      - echo disabling the existing service
+      - sudo a2dissite 001_default.conf
     finally:
-      - command
-      - command
-    
-  post_build:
-    run-as: Linux-user-name
-    on-failure: ABORT | CONTINUE
-    commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
+      - echo setup has completed successfully.
+
 
