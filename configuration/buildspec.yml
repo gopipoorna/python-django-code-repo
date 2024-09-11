@@ -17,7 +17,7 @@ phases:
       - echo installing pip3 for python
       - sudo apt-get install python3-pip -y
       - echo installing python virtual environment
-      - sudo apt install python-venv -y
+      - sudo apt install python3-venv -y
       - echo Installing Virtualenv using PIP3
       - sudo pip3 install virtualenv -y
     
