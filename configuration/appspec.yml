@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/python-django-code-repo
+hooks:
+  BeforeInstall:
+      - location: configuration/before_install.sh
+  AfterInstall:
+      - location: configuration/after_install.sh
