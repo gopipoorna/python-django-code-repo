@@ -905,7 +905,7 @@ WITH
    
 Ec2 instance user data:
  
- #!/bin/bash
+#!/bin/bash
 
 sudo apt update
 sudo apt install ruby-full -y
