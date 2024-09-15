@@ -28,9 +28,9 @@ sudo chown :www-data python-django-code-repo/g2020wa15340/media
 sudo chmod 755 $(pwd)
 sudo chown :www-data python-django-code-repo/g2020wa15340/db.sqlite3
 sudo chmod 755 python-django-code-repo/g2020wa15340/db.sqlite3
-cd /etc/apache2/sites-available
 sudo a2ensite django-apache.conf
-sudo a2dissite 000_default.conf
+sudo systemctl reload apache2
+sudo a2dissite 000-default.conf
 sudo systemctl reload apache2
 sudo systemctl restart apache2
 
