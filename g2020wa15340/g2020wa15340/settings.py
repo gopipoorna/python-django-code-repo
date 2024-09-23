@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost"]
 
 
 # Application definition
@@ -140,7 +140,7 @@ USE_TZ = False
 
 # For accessing the site from the Cloud9 URL 
 
-CSRF_TRUSTED_ORIGINS=['http://', "https://", "https://*.amazonaws.com"]
+CSRF_TRUSTED_ORIGINS=['http://', "https://"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
