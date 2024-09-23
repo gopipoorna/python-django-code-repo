@@ -86,10 +86,21 @@ WSGI_APPLICATION = 'g2020wa15340.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'blogapp',
+        'USER': 'admin',
+        'PASSWORD': 'poorna1999',
+        'HOST': 'blogapp.cqaqtxayztiq.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',  # Default MySQL port
     }
 }
 
@@ -126,7 +137,7 @@ USE_TZ = True
 
 # For accessing the site from the Cloud9 URL 
 
-CSRF_TRUSTED_ORIGINS=['http://', "https://"]
+CSRF_TRUSTED_ORIGINS=['http://', "https://", "https://*.amazonaws.com"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

@@ -915,3 +915,57 @@ sudo wget -P /home/ubuntu/ https://aws-codedeploy-us-east-1.s3.us-east-1.amazona
 sudo chmod +x /home/ubuntu/install
 sudo /home/ubuntu/install auto > /tmp/logfile
 
+
+============================================================================================================
+setting up the MySQL as the database 
+
+for this, create an RDS in AWS in the same VPC and allow security groups to inbound the traffic from the ec2 instance
+
+then install the mysqlclient library, this will be included in the requirements.txt file, so no for this after installing the mysqlclient
+
+https://pypi.org/project/mysqlclient/ --> check this page for installing the mysqlclient
+
+$ pip freeze >> requirements.txt
+
+and this will add the mysqlclient library, 
+
+then try to connect to the MySQL RDS from the development server, to do this from the terminal
+
+$ mysql -h <RDS-ENDPOINT> -u admin -p 
+
+then enter the password, if connectivity is successful then we can proceed, if not then check the Security groups once again.
+
+Then, create a database in it with the name, you like by using the query,
+
+$ create database <database_name>;
+$ show databases;
+$ exit;
+
+Now, exit from the sql engine, now, add this stanza in the settings.py file.
+
+--------------------------------------------------------------------------
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db-name',
+        'USER': 'username',
+        'PASSWORD': 'password',
+        'HOST': 'host-name',
+        'PORT': '3306',  # Default MySQL port
+    }
+}
+--------------------------------------------------------------------------
+
+Now, by using the manage.py file, try to make migrations
+
+$ python3 manage.py makemigrations
+$ python3 manage.py migrate
+
+Now, our database connectivity is done and successful.
+
+=======================================================================================
+
+Let's write the testcases now.
+
+For this, we will be using Selenium and Django test suite.
+
