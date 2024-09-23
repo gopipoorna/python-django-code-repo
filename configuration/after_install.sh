@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd /home/ubuntu/python-django-code-repo/g2020wa15340
+cd /home/ubuntu/blog-app/python-django-code-repo/g2020wa15340
 
 # activate virtual environment
 python3 -m venv venv
@@ -22,7 +22,7 @@ sudo systemctl enable apache2
 cd /home/ubuntu/
 
 echo "Giving permissions"
-sudo cp python-django-code-repo/configuration/django-apache.conf /etc/apache2/sites-available/
+sudo cp blog-app/python-django-code-repo/configuration/django-apache.conf /etc/apache2/sites-available/
 sudo chown :www-data blog-app/
 sudo chown :www-data blog-app/python-django-code-repo/
 sudo chown :www-data blog-app/python-django-code-repo/g2020wa15340
