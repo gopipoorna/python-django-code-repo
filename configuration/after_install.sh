@@ -3,17 +3,17 @@
 cd /home/ubuntu/g2020wa15340
 
 # activate virtual environment
-python3 -m venv venv
+sudo python3 -m venv venv
 source venv/bin/activate
 
 echo "install requirements.txt"
-pip install -r /home/ubuntu/g2020wa15340/requirements.txt
+sudo venv/bin/pip install -r /home/ubuntu/g2020wa15340/requirements.txt
 
 echo "collecting all static files"
-cd /home/ubuntu/
-python3 g2020wa15340/manage.py collectstatic
-python3 g2020wa15340/manage.py makemigrations
-python3 g2020wa15340/manage.py migrate
+cd /home/ubuntu/g2020wa15340
+sudo venv/bin/python3 g2020wa15340/manage.py collectstatic
+sudo venv/bin/python3 g2020wa15340/manage.py makemigrations
+sudo venv/bin/python3 g2020wa15340/manage.py migrate
 
 echo "Starting apache server"
 sudo systemctl start apache2
