@@ -100,7 +100,10 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'poorna1999',
         'HOST': 'blogapp.cqaqtxayztiq.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',  # Default MySQL port
+        'PORT': '3306',  # Default MySQL port,
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_ALL_TABLES';"
+            }
     }
 }
 
