@@ -12,6 +12,7 @@ pip install -r /home/ubuntu/python-django-code-repo/g2020wa15340/requirements.tx
 echo "collecting all static files"
 cd /home/ubuntu/python-django-code-repo
 python3 g2020wa15340/manage.py collectstatic
+python3 g2020wa15340/manage.py makemigrations
 python3 g2020wa15340/manage.py migrate
 
 echo "Starting apache server"
