@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 # # clean codedeploy-agent files for a fresh install
-# sudo rm -rf /home/ubuntu/install
-sudo rm -rf /home/ubuntu/python-django-code-repo/
+# sudo rm -rf /home/ubuntu/instal
+cd /home/ubuntu
+sudo rm -rf python-django-code-repo/
 
 # # install CodeDeploy agent
 # sudo apt-get -y update
@@ -18,5 +19,4 @@ sudo apt-get update
 sudo apt upgrade -y
 sudo apt-get install -y python3 python3-dev python3-pip python3-venv git apache2 apache2-utils ssl-cert libapache2-mod-wsgi-py3 default-libmysqlclient-dev build-essential pkg-config
 pip install --user --upgrade virtualenv
-cd /home/ubuntu
 sudo git clone https://github.com/gopipoorna/python-django-code-repo.git
