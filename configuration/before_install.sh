@@ -2,7 +2,7 @@
 
 # # clean codedeploy-agent files for a fresh install
 # sudo rm -rf /home/ubuntu/install
-sudo rm -rf /home/ubuntu/*
+sudo rm -rf /home/ubuntu/python-django-code-repo/
 
 # # install CodeDeploy agent
 # sudo apt-get -y update
