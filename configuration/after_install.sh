@@ -10,7 +10,7 @@ echo "install requirements.txt"
 sudo venv/bin/pip install -r /home/ubuntu/g2020wa15340/requirements.txt
 
 echo "collecting all static files"
-cd /home/ubuntu/g2020wa15340
+cd /home/ubuntu
 sudo venv/bin/python3 g2020wa15340/manage.py collectstatic
 sudo venv/bin/python3 g2020wa15340/manage.py makemigrations
 sudo venv/bin/python3 g2020wa15340/manage.py migrate
