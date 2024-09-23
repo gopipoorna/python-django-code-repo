@@ -879,8 +879,8 @@ Troubleshooting notes:
 https://forum.djangoproject.com/t/403-forbidden-apache2-you-dont-have-permission-to-access-this-resource/18709/3
 
 RDS: 
-username: blogadmin
-password: WQWsR25yrKGf5TQAn3ha
+username: blogapp
+password: poorna1999
 
 psql \
    --host=blog-app.cqaqtxayztiq.us-east-1.rds.amazonaws.com \
@@ -914,3 +914,4 @@ cd /home/ubuntu
 sudo wget -P /home/ubuntu/ https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
 sudo chmod +x /home/ubuntu/install
 sudo /home/ubuntu/install auto > /tmp/logfile
+
