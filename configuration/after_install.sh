@@ -25,6 +25,7 @@ echo "Giving permissions"
 sudo cp configuration/django-apache.conf /etc/apache2/sites-available/
 sudo chown :www-data g2020wa15340/
 sudo chown :www-data g2020wa15340/media
+sudo chown :www-data g2020wa15340/static
 sudo chmod 755 $(pwd)
 sudo chown :www-data g2020wa15340/db.sqlite3
 sudo chmod 755 g2020wa15340/db.sqlite3
