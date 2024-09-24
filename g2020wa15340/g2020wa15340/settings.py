@@ -24,11 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b' # os.environ.get("SECRET") #
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 config = open("/tmp/public-ip.txt", "r")
-# ip = config.readline()
+ip = config.readline()
 
-ALLOWED_HOSTS = [config.readline(), 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [ip, 'localhost', '127.0.0.1']
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 
 # Application definition
