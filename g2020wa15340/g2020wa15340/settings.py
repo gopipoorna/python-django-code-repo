@@ -25,9 +25,11 @@ SECRET_KEY = 'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+config = open("/tmp/public-ip.txt", "r")
+# ip = config.readline()
 
-ALLOWED_HOSTS = ["localhost"]
-
+ALLOWED_HOSTS = [config.readline(), 'localhost', '127.0.0.1']
+SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 
 # Application definition
 

@@ -22,3 +22,4 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y python3 python3-dev python3-pip python3-venv git apache2 apache2-utils ssl-cert libapache2-mod-wsgi-py3 default-libmysqlclient-dev build-essential pkg-config
 pip install --user --upgrade virtualenv
+sudo curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4 > /tmp/public-ip.txt
