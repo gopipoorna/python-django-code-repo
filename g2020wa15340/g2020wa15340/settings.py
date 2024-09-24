@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ip = os.environ.get("IP")
+fd = os.open('/tmp/publicip.txt', os.O_RDWR , 0o666)
+f_size = os.path.getsize("newFile.txt")	
+ip = os.read(fd, f_size)
+os.close(fd)
 
 ALLOWED_HOSTS = [ip, 'localhost', '127.0.0.1']
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
