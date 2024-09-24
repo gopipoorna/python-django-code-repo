@@ -26,5 +26,6 @@ pip install --user --upgrade virtualenv
 # Grab an IMDSv2 token
 TOKEN=`curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
 
-IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4)
-echo "IP Address is $IP"
+curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4 >> /tmp/publicip.txt
+
+cat /tmp/publicip.txt
