@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+source /home/ubuntu/configuration/set_env.sh
 
 cd /home/ubuntu/g2020wa15340
 

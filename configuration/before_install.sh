@@ -12,7 +12,6 @@
 # sudo apt-get -y update
 # sudo apt-get -y install ruby
 # sudo apt-get -y install wget
-# cd /home/ubuntu
 # wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
 # sudo chmod +x ./install 
 # sudo ./install auto
@@ -22,5 +21,3 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y python3 python3-dev python3-pip python3-venv git apache2 apache2-utils ssl-cert libapache2-mod-wsgi-py3 default-libmysqlclient-dev build-essential pkg-config
 pip install --user --upgrade virtualenv
-
-source /home/ubuntu/configuration/set_env.sh
