@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo chmod 777 /home/ubuntu/configuration/set_env.sh
+
 source /home/ubuntu/configuration/set_env.sh
 
 cd /home/ubuntu/g2020wa15340
