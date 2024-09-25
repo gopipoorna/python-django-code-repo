@@ -5,4 +5,4 @@ TOKEN=`curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-me
 
 export PUBLIC_IP_EC2=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4)
 
-echo "IP from export = $IP"
+echo "IP from export = $PUBLIC_IP_EC2"
