@@ -28,4 +28,6 @@ TOKEN=`curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-me
 
 curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4 > /tmp/publicip.txt
 sudo chmod 777 /tmp/publicip.txt
-cat /tmp/publicip.txt
+
+sudo python3 set_env.py
+echo $IP

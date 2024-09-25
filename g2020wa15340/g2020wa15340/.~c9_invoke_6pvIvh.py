@@ -25,10 +25,10 @@ SECRET_KEY = 'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+ip = os.environ.get("IP")
 ip = os.environ.get("IP")
 
-ALLOWED_HOSTS = [ip, 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [, 'localhost', '127.0.0.1']
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 
 # Application definition
