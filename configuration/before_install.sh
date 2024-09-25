@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # # clean codedeploy-agent files for a fresh install
 # sudo rm -rf /home/ubuntu/instal
@@ -23,12 +23,4 @@ sudo apt-get upgrade -y
 sudo apt-get install -y python3 python3-dev python3-pip python3-venv git apache2 apache2-utils ssl-cert libapache2-mod-wsgi-py3 default-libmysqlclient-dev build-essential pkg-config
 pip install --user --upgrade virtualenv
 
-# Grab an IMDSv2 token
-TOKEN=`curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
-
-curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4 > /tmp/publicip.txt
-sudo chmod 777 /tmp/publicip.txt
-export IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4)
-echo "IP from export = $IP"
-sudo python3 set_env.py
-echo "echo from IP 2 $IP"
+source /home/ubuntu/configuration/set_env.sh
