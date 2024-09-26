@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import re
-import os
 import boto3
 
 file = open("/home/ubuntu/g2020wa15340/.env", "r+")
@@ -16,7 +15,6 @@ print(new_val)
 file.close()
 file2.close()
 
-os.remove("/home/ubuntu/g2020wa15340/.env")
 
 file3 = open("/home/ubuntu/g2020wa15340/.env", "w")
 file3.write(new_val.strip())

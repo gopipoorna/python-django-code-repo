@@ -20,7 +20,7 @@ cat /tmp/public_ip.txt
 
 sudo chmod 777 /home/ubuntu/g2020wa15340/.env
 
-sudo python3 /home/ubuntu/configuration/set_up_conf.py
+python3 /home/ubuntu/configuration/set_up_conf.py
 
 echo "collecting all static files"
 sudo venv/bin/python3 /home/ubuntu/g2020wa15340/manage.py collectstatic
