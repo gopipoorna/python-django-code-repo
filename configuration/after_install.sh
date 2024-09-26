@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-sudo chmod 777 /home/ubuntu/g2020wa15340/.env
-
 cd /home/ubuntu/g2020wa15340
-
-python3 /home/ubuntu/configuration/set_ip.py
 
 # activate virtual environment
 sudo python3 -m venv venv
