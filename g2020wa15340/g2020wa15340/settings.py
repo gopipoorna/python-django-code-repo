@@ -30,7 +30,7 @@ SECRET_KEY = str(env('SECRET')) #'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [env('EC2_PUBLIC_IP'), 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [env('EC2_PUBLIC_IP'), 'localhost', '127.0.0.1', "*"]
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -144,16 +145,30 @@ USE_TZ = True
 
 # For accessing the site from the Cloud9 URL 
 
-CSRF_TRUSTED_ORIGINS=['http://', "https://"]
+CSRF_TRUSTED_ORIGINS=['http://', "https://", "https://*.amazonaws.com"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+###################################
+'''
+AWS S3 as a storage for media
+'''
+
+
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_DEFAULT_ACL = none
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_FILE_OVERWRITE = False
+
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
