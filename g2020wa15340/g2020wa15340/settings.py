@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b' # os.environ.get("SECRET") #
+SECRET_KEY = str(os.environ.get("SECRET")) #'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b' # 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ip = os.environ.get("IP")
-
-ALLOWED_HOSTS = [ip, 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [os.environ.get("EC2_PUBLIC_IP"), 'localhost', '127.0.0.1']
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 
 # Application definition
@@ -98,10 +98,10 @@ WSGI_APPLICATION = 'g2020wa15340.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blogapp',
-        'USER': 'admin',
-        'PASSWORD': 'poorna1999',
-        'HOST': 'blogapp.cqaqtxayztiq.us-east-1.rds.amazonaws.com',
+        'NAME': os.environ.get("DB_NAME"),
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASS"),
+        'HOST': os.environ.get("DB_HOST"),
         'PORT': '3306',  # Default MySQL port,
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_ALL_TABLES';"
@@ -138,7 +138,7 @@ TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 # For accessing the site from the Cloud9 URL 
 
