@@ -11,24 +11,26 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import environ
 from pathlib import Path
-from dotenv import load_dotenv
-load_dotenv()
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.environ.get("SECRET")) #'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b' # 
+SECRET_KEY = str(env('SECRET')) #'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b' # 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get("EC2_PUBLIC_IP"), 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [env('EC2_PUBLIC_IP'), 'localhost', '127.0.0.1']
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 
 # Application definition
@@ -98,10 +100,10 @@ WSGI_APPLICATION = 'g2020wa15340.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get("DB_NAME"),
-        'USER': os.environ.get("DB_USER"),
-        'PASSWORD': os.environ.get("DB_PASS"),
-        'HOST': os.environ.get("DB_HOST"),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASS'),
+        'HOST': env('DB_HOST'),
         'PORT': '3306',  # Default MySQL port,
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_ALL_TABLES';"
