@@ -28,7 +28,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = str(env('SECRET')) #'django-insecure-&(4le6nb^5jh=&^!7jf24ezx55if2lln#gr)gdo15&#ndgo^9b' # 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [env('EC2_PUBLIC_IP'), 'localhost', '127.0.0.1', "*"]
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
