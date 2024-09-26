@@ -882,31 +882,10 @@ RDS:
 username: blogapp
 password: poorna1999
 
-psql \
-   --host=blog-app.cqaqtxayztiq.us-east-1.rds.amazonaws.com \
-   --port=5432 \
-   --username=blogadmin \
-   --password \
-   --dbname=postgres 
-   
-
-CREATE DATABASE blogs
-WITH
-   [OWNER =  django_admin]
-   [TEMPLATE = template]
-   [ENCODING = encoding]
-   [LC_COLLATE = collate]
-   [LC_CTYPE = ctype]
-   [TABLESPACE = tablespace_name]
-   [ALLOW_CONNECTIONS = true | false]
-   [CONNECTION LIMIT = max_concurrent_connection]
-   [IS_TEMPLATE = true | false ];
-   
    
 Ec2 instance user data:
  
 #!/bin/bash
-
 sudo apt update
 sudo apt install ruby-full -y
 sudo apt install wget
@@ -915,6 +894,18 @@ sudo wget -P /home/ubuntu/ https://aws-codedeploy-us-east-1.s3.us-east-1.amazona
 sudo chmod +x /home/ubuntu/install
 sudo /home/ubuntu/install auto > /tmp/logfile
 
+since, we don't have any artifacts for our application, so we have to create a scripts, that are used to deploy our application, successfully.
+
+For this, I have created the configuration folder and put all configuration files
+
+apache conf file for application, 
+before install and after install scripts for setting up configs in place and to invoke and setup the environment variables.
+We are not using buildspec.yml file.
+set_up_conf.py file for fetching the variables from SSM parameters and add to the .env file in the root folder of the project.
+
+by this all the configs will be done.
+
+To run the CI-CD pipelines successfully, we have to use the appspec.yml file, which is used for 
 
 ============================================================================================================
 setting up the MySQL as the database 
@@ -968,4 +959,159 @@ Now, our database connectivity is done and successful.
 Let's write the testcases now.
 
 For this, we will be using Selenium and Django test suite.
+
+========================================================================
+
+As per our requirements, we have to hide the sensitive data, especially when we push into the GitHub.
+
+For this purpose, we are using SSM Parameter store and saving all the important keys and sensitive content in that and fetching from it.
+
+For this, we have created a python file called set_up_conf.py file, which is used for appending the public IP of the machine and to fetch the 
+SSM parameters from the AWS services and use it.
+
+By this, we don't have to do anything in the server, when we initiate a webhook, from then the whole process will be complete and successful, without any manual intervention
+
+This will help us to do the activity successful.
+
+We are also initiating this script from the after_install.sh script, so that the process will be complete and successful.
+
+For this we are using the module called - django-environ
+
+$ pip install django-environ
+
+Which by default checks the .env file in the project root directory, where all the Environmental variables will be stored for the applciation.
+
+From this we are fetching the environment variables, for this, we have to import the following module and use it.
+
+---------------------------------------------------------
+
+import environ
+
+env = environ.Env()
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+and we can import the data by simply giving the format
+
+env("VARIABLE_NAME")
+
+wherever you use.
+
+Check the Settings.py file for more info.
+
+==============================================================================
+
+And we will face some issue when we try to start the application for this, we have to add the attribute in settings.py file - "SECURE_CROSS_ORIGIN_OPENER_POLICY=None"
+
+This will help to open the site without any issues.
+
+==============================================================================
+
+Now, we have a constraint, which is when the user access the application from any of the server and uploads any media files like profile pics, then when he access any
+other server he can't be able to access the image, so we have to use a centralized place, where the server should be able to access the content from s3 bucket not just
+dependent on the server.
+
+For this, we have to add this configuration in settings.py file.
+and also save the .env file
+before using this, we have to install the modules - django-storages and boto3 library for this
+#########################################
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_FILE_OVERWRITE = False
+########################################
+
+Then set this up and also create a bot user for getting access key id and access key and once it is generated, add the CORS configuration at S3 bucket.
+
+For this add the below configuration under the permissions>CORS
+##############################################
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "PUT",
+            "POST",
+            "GET"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+    }
+]
+############################################
+
+This will help to fetch the data from the s3 bucket and also add the policy to the new IAM user to access the s3 bucket and objects in it.
+
+###################################################
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": [
+                "arn:aws:s3:::2020wa15340-blog-app",
+                "arn:aws:s3:::2020wa15340-blog-app/*"
+            ]
+        }
+    ]
+}
+
+#######################################################
+
+And now we have a function in the profile model called "Save", to work we have to comment it, so the save will work predefinedly.
+
+Now, we have to copy the data from the Media path to s3 bucket and also make sure to leave only static configuration from the settings.py file
+
+#######################################
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+############################################
+
+and comment out the Media configuration and now, this will be useful to store the profile pics in the S3 bucket.
+
+We have also utilised the ec2 instance metadata, which will be useful to fetch the Public-IP of the ec2 instance dynamically and 
+
+Assign it to the ALLOWED_HOSTS in settings.py file.
+
+This will make the application work with the host name.
+
+This all functionality we have given to the CI-CD, which will help us to automate the things dynamically.
+
+##########################################################################
+
+Make sure, after importing the modules, activate your virtual environment and freeze all the modules into the requirements.txt file.
+
+==========================================================================
+
+Let's set the favicon icon for the application, for this add the 
+
+below line in the dafault.html file under the title 
+
+<link ref="icon" href="{% static 'images/<image_name.ext>' %}"/>
+
+and also make sure to add the images folder under the blog/static folder and then copy the image to this folder,
+
+then automatically, when we run the collectstatic command, it will move the image to the actual static command.
+
+and also make sure to update the collectstatic command with
+
+python manage.py collectstatic --noprompt
+
+This will make the application works with the latest static file.
+
+=================================================================================
+
+The last thing we have to do is to create test cases for everything and the selenium testcases.
+
+for this we are going to use the py files in the tests.py file in all the applications.
 
