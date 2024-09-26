@@ -23,7 +23,7 @@ sudo chmod 777 /home/ubuntu/g2020wa15340/.env
 python3 /home/ubuntu/configuration/set_up_conf.py
 
 echo "collecting all static files"
-sudo venv/bin/python3 /home/ubuntu/g2020wa15340/manage.py collectstatic
+sudo venv/bin/python3 /home/ubuntu/g2020wa15340/manage.py collectstatic --noinput
 sudo venv/bin/python3 /home/ubuntu/g2020wa15340/manage.py makemigrations
 sudo venv/bin/python3 /home/ubuntu/g2020wa15340/manage.py migrate
 
