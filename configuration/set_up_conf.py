@@ -35,7 +35,7 @@ BS = f'SECRET={DjangoSecret["Parameter"]["Value"]}'
 DH = f'DB_HOST={DBHost["Parameter"]["Value"]}'
 DP = f"DB_PASS={DBPass['Parameter']['Value']}"
 
-data = AKV+"\n"+ASAK+"\n"+BS+"\n"+DH+"\n"+DP
+data = "\n"+AKV+"\n"+ASAK+"\n"+BS+"\n"+DH+"\n"+DP
 
 file = open("/home/ubuntu/g2020wa15340/.env", "a")
 file.write(data)
