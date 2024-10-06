@@ -25,12 +25,18 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(env('SECRET')) 
+SECRET_KEY = str(env('SECRET')) # "django-app" #
+
+# uncomment the str(env('SECRET')) when you are setting the Debug to False
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [env('EC2_PUBLIC_IP'), 'localhost', '127.0.0.1', "*"]
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
+else: 
+    ALLOWED_HOSTS = [env('EC2_PUBLIC_IP')]
+    
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 
 # Application definition
@@ -91,26 +97,27 @@ WSGI_APPLICATION = 'g2020wa15340.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASS'),
-        'HOST': env('DB_HOST'),
-        'PORT': '3306',  # Default MySQL port,
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_ALL_TABLES';"
-            }
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASS'),
+            'HOST': env('DB_HOST'),
+            'PORT': '3306',  # Default MySQL port,
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_ALL_TABLES';"
+                }
+        }
+    }
 
 
 # Password validation
@@ -151,21 +158,28 @@ CSRF_TRUSTED_ORIGINS=['http://', "https://", "https://*.amazonaws.com"]
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 ###################################
-'''
-AWS S3 as a storage for media
-'''
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
+else:
+    
+    '''
+    AWS S3 as a storage for media
+    '''
 
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_S3_FILE_OVERWRITE = False
-
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+    AWS_DEFAULT_ACL = None
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_S3_FILE_OVERWRITE = False
+    
+    
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'

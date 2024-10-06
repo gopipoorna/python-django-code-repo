@@ -1111,7 +1111,23 @@ This will make the application works with the latest static file.
 
 =================================================================================
 
-The last thing we have to do is to create test cases for everything and the selenium testcases.
+Now, what we have to do is to create test cases for everything and the selenium testcases.
 
 for this we are going to use the py files in the tests.py file in all the applications.
 
+For this, let's create a folder called tests in all the apps.
+
+.env file
+==========================================
+DB_USER=admin
+DB_NAME=blogapp
+AWS_STORAGE_BUCKET_NAME=2020wa15340-blog-app
+EC2_PUBLIC_IP=10.6.88.90
+============================================
+
+For testing purpose, we have created a test user
+
+username = testuser
+password = blog@123
+
+Webdriver for Selenium ---> https://googlechromelabs.github.io/chrome-for-testing/#stable
