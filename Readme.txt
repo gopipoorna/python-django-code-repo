@@ -1134,3 +1134,12 @@ Webdriver for Selenium ---> https://googlechromelabs.github.io/chrome-for-testin
 
 
 Adding buildstage to test the test cases
+
+
+======================================================================
+
+Adding cloudwatch agent
+
+wget https://amazoncloudwatch-agent-us-east-1.s3.us-east-1.amazonaws.com/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+wget https://amazoncloudwatch-agent-us-east-1.s3.us-east-1.amazonaws.com/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb.sig
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json

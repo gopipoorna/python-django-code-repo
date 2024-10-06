@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+#installing cloudwatch agent to monitor the website logs and infrastructure
+
+sudo wget https://amazoncloudwatch-agent-us-east-1.s3.us-east-1.amazonaws.com/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+sudo dpkg -i -E amazon-cloudwatch-agent.deb
+sudo mv /home/ubuntu/configuration/config.json /opt/aws/amazon-cloudwatch-agent/bin/
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
+
 cd /home/ubuntu/g2020wa15340
 
 # activate virtual environment
