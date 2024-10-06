@@ -1131,3 +1131,6 @@ username = testuser
 password = blog@123
 
 Webdriver for Selenium ---> https://googlechromelabs.github.io/chrome-for-testing/#stable
+
+
+Adding buildstage to test the test cases
