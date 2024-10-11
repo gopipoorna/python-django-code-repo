@@ -1,0 +1,31 @@
+{
+  "AlarmActions": [
+    "arn:aws:sns:us-east-1:572678256663:Blog_Prod_App_Notifications"
+  ],
+  "AlarmName": "Blog Server CPU Utilization more than 75%",
+  "AlarmDescription": "Server is utilising more than 75%.",
+  "Metrics": [
+    {
+      "Id": "m1",
+      "ReturnData": true,
+      "MetricStat": {
+        "Metric": {
+          "MetricName": "CPUUtilization",
+          "Namespace": "CWAgent",
+          "Dimensions": [
+            {
+              "Name": "InstanceId",
+              "Value": "i-02815358e835fa4de"
+            }
+          ]
+        },
+        "Stat": "Average",
+        "Period": 300
+        "Unit": "Percent"
+      }
+    }
+  ],
+  "EvaluationPeriods": 2,
+  "ThresholdMetricId": "t1",
+  "ComparisonOperator": "GreaterThanOrEqualToThreshold"
+}
