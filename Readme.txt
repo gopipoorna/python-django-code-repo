@@ -1146,3 +1146,5 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-c
 
 
 Finally, we have added the monitors to monitor the infrastructure.
+
+We need to add monitors for monitoring application.
