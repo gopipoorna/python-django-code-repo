@@ -7,6 +7,19 @@ sudo dpkg -i -E amazon-cloudwatch-agent.deb
 sudo mv /home/ubuntu/configuration/config.json /opt/aws/amazon-cloudwatch-agent/bin/
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
 
+# Setting up monitors to monitor instance usage of CPU, Memory and Disk
+
+# Grab an IMDSv2 token
+TOKEN=`curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+
+instance_id=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id)
+
+aws cloudwatch put-metric-alarm --alarm-name $instance_id"_Blog_Server_HighCPUUtilization" --comparison-operator "GreaterThanThreshold" --namespace "AWS/EC2" --metric-name "CPUUtilization" --dimensions Name="InstanceId",Value="$instance_id" --threshold 80 --period 60 --evaluation-periods 2 --alarm-description $instance_id" CPU usage exceeds 80%" --alarm-actions "arn:aws:sns:us-east-1:572678256663:Blog_Prod_App_Notifications" --unit Percent --statistic Average
+
+aws cloudwatch put-metric-alarm --alarm-name $instance_id"_Blog_Server_HighDiskUtilization" --comparison-operator "GreaterThanThreshold" --namespace "AWS/EC2" --metric-name "DiskSpaceUsedPercentage" --dimensions Name="InstanceId",Value="$instance_id" --threshold 90 --period 60 --evaluation-periods 2 --alarm-description $instance_id" Disk usage exceeds 90%"  --alarm-actions "arn:aws:sns:us-east-1:572678256663:Blog_Prod_App_Notifications" --unit Percent --statistic Average
+
+aws cloudwatch put-metric-alarm --alarm-name $instance_id"_Blog_Server_HighMemoryUtilization" --comparison-operator "GreaterThanThreshold" --namespace "AWS/EC2" --metric-name "MemoryUtilization" --dimensions Name="InstanceId",Value="$instance_id"  --threshold 85 --period 60 --evaluation-periods 2 --alarm-description $instance_id" Memory usage is above 85%" --alarm-actions "arn:aws:sns:us-east-1:572678256663:Blog_Prod_App_Notifications" --unit Percent --statistic Average
+
 cd /home/ubuntu/g2020wa15340
 
 # activate virtual environment
