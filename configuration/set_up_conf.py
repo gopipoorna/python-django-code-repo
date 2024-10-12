@@ -44,3 +44,17 @@ data = "\n"+AKV+"\n"+ASAK+"\n"+BS+"\n"+DH+"\n"+DP+"\n"+EU+"\n"+EP
 file = open("/home/ubuntu/g2020wa15340/.env", "a")
 file.write(data)
 file.close()
+
+
+import os
+
+def add_line_if_not_exists(file_path, line):
+    with open(file_path, "a+") as file:  # Open in append mode, creating the file if it doesn't exist
+        file.seek(0)  # Go to the beginning of the file to check for the line
+        if line not in file.read():
+            file.write(line + "\n")  # Add the line if it's not present
+
+file_path = "/etc/crontab"
+line_to_add = "*/30 * * * * root /home/ubuntu/configuration/set_up_conf.py"
+
+add_line_if_not_exists(file_path, line_to_add)
