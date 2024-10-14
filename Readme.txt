@@ -1148,3 +1148,9 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-c
 Finally, we have added the monitors to monitor the infrastructure.
 
 We need to add monitors for monitoring application.
+
+=================================================================================
+
+For enabling Lambda to monitor the application code - https://docs.aws.amazon.com/lambda/latest/dg/python-layers.html
+
+We are using AWS LAMBDA and AWS Eventbridge to monitor the application URL.
