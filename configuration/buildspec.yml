@@ -11,7 +11,6 @@ phases:
       - . venv/bin/activate
       - pip install -r g2020wa15340/requirements.txt
       - python configuration/set_cb_values.py True
-      - python configuration/set_up_conf.py
       - python g2020wa15340/manage.py test blog.tests
       - python g2020wa15340/manage.py test users.tests
       - python configuration/set_cb_values.py False
