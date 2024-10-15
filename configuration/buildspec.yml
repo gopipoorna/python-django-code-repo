@@ -10,9 +10,9 @@ phases:
       - python3 -m venv venv
       - . venv/bin/activate
       - pip install -r g2020wa15340/requirements.txt
-      - python configuration/set_cb_values.py True
+      - python configuration/set_cb_values.py 1
       - python g2020wa15340/manage.py test blog.tests
       - python g2020wa15340/manage.py test users.tests
-      - python configuration/set_cb_values.py False
+      - python configuration/set_cb_values.py 0
     finally:
       - echo setup has completed successfully.

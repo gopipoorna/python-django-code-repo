@@ -30,7 +30,7 @@ SECRET_KEY =  str(env('SECRET')) #"django-app" #
 # uncomment the str(env('SECRET')) when you are setting the Debug to False
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = bool(int(env('DEBUG')))
 
 if DEBUG:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1', "*"]

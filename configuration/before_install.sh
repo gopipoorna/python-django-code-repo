@@ -19,5 +19,5 @@
 # update os & install python3, apache2 and some important libraries
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install -y python3 python3-dev python3-pip python3-venv git apache2 apache2-utils ssl-cert libapache2-mod-wsgi-py3 default-libmysqlclient-dev build-essential pkg-config collectd
+sudo apt-get install -y awscli python3 python3-dev python3-pip python3-venv git apache2 apache2-utils ssl-cert libapache2-mod-wsgi-py3 default-libmysqlclient-dev build-essential pkg-config collectd
 pip install --user --upgrade virtualenv
