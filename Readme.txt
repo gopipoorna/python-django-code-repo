@@ -1154,3 +1154,8 @@ We need to add monitors for monitoring application.
 For enabling Lambda to monitor the application code - https://docs.aws.amazon.com/lambda/latest/dg/python-layers.html
 
 We are using AWS LAMBDA and AWS Eventbridge to monitor the application URL.
+
+
+======================================================================
+
+Updated testing through AWS CodeBuild
