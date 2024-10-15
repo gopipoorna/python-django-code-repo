@@ -2,12 +2,18 @@ version: 0.1
 
 env:
   shell: /bin/bash
-    
+  
 phases:
   build:
     commands:
-      - echo "Deploying application into the server."
+      - echo "Starting the Testing of the application."
+      - python3 -m venv venv
+      - . venv/bin/activate
+      - pip install -r g2020wa15340/requirements.txt
+      - python configuration/set_cb_values.py True
+      - python configuration/set_up_conf.py
+      - python g2020wa15340/manage.py test blog.tests
+      - python g2020wa15340/manage.py test users.tests
+      - python configuration/set_cb_values.py False
     finally:
       - echo setup has completed successfully.
-
-
