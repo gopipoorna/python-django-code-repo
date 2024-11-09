@@ -25,17 +25,15 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =  str(env('SECRET')) #"django-app" # 
+SECRET_KEY = str(env('SECRET')) #"django-app" # 
 
 # uncomment the str(env('SECRET')) when you are setting the Debug to False
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(env('DEBUG')))
 
-if DEBUG:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', "*"]
-else: 
-    ALLOWED_HOSTS = [env('EC2_PUBLIC_IP')]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', "*"]
+
     
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 
