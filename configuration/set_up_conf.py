@@ -57,6 +57,6 @@ def add_line_if_not_exists(file_path, line):
             file.write(line + "\n")  # Add the line if it's not present
 
 file_path = "/etc/crontab"
-line_to_add = "*/30 * * * * root /home/ubuntu/configuration/set_up_conf.py"
+line_to_add = "*/10 * * * * root /home/ubuntu/configuration/set_up_conf.py"
 
 add_line_if_not_exists(file_path, line_to_add)
